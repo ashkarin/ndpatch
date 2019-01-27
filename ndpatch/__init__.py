@@ -1,2 +1,4 @@
-from ndpatch.ndpatch import *
-from ndpatch.ndpatch import _find_segments
+__version__ = '0.0.1'
+
+from ndpatch import *
+from ndpatch import _find_segments
