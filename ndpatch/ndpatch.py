@@ -171,7 +171,7 @@ def get_random_patch_index(array_shape, patch_shape):
     return get_random_nd_index(np.subtract(array_shape, patch_shape))
 
 
-def _find_segments(array_size, patch_size, index):
+def find_segments(array_size, patch_size, index):
     """ Find grid and patch segmentes.
     
     There is an infinite grid, which coarse cells have array shape. 
@@ -298,7 +298,7 @@ def get_ndpatch(array, shape, index):
 
     array_slices, patch_slices = [], []
     for array_dim_size, patch_dim_size, dim_index in zip(array.shape, patch_shape, index):
-        grid_dim_segments, patch_dim_segments = _find_segments(array_dim_size, patch_dim_size, dim_index)
+        grid_dim_segments, patch_dim_segments = find_segments(array_dim_size, patch_dim_size, dim_index)
         array_dim_slices, patch_dim_slices = _segments2slices(array_dim_size, grid_dim_segments, patch_dim_segments)
         array_slices.append(array_dim_slices)
         patch_slices.append(patch_dim_slices)

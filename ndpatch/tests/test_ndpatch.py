@@ -17,7 +17,7 @@ class TestFindSegments(unittest.TestCase):
         coarse_cell_size = 10
         patch_size = 5
         index = 2
-        gird_segments, patch_segments = ndpatch._find_segments(coarse_cell_size, patch_size, index)
+        gird_segments, patch_segments = ndpatch.find_segments(coarse_cell_size, patch_size, index)
         
         self.assertEqual(len(gird_segments), 1)
         self.assertEqual(len(patch_segments), 1)
@@ -38,7 +38,7 @@ class TestFindSegments(unittest.TestCase):
         coarse_cell_size = 10
         patch_size = 5
         index = -2
-        gird_segments, patch_segments = ndpatch._find_segments(coarse_cell_size, patch_size, index)
+        gird_segments, patch_segments = ndpatch.find_segments(coarse_cell_size, patch_size, index)
         
         self.assertEqual(len(gird_segments), 2)
         self.assertEqual(len(patch_segments), 2)
@@ -61,7 +61,7 @@ class TestFindSegments(unittest.TestCase):
         coarse_cell_size = 10
         patch_size = 5
         index = -20
-        gird_segments, patch_segments = ndpatch._find_segments(coarse_cell_size, patch_size, index)
+        gird_segments, patch_segments = ndpatch.find_segments(coarse_cell_size, patch_size, index)
         
         self.assertEqual(len(gird_segments), 1)
         self.assertEqual(len(patch_segments), 1)
@@ -82,7 +82,7 @@ class TestFindSegments(unittest.TestCase):
         coarse_cell_size = 5
         patch_size = 9
         index = -2
-        gird_segments, patch_segments = ndpatch._find_segments(coarse_cell_size, patch_size, index)
+        gird_segments, patch_segments = ndpatch.find_segments(coarse_cell_size, patch_size, index)
         
         self.assertEqual(len(gird_segments), 3)
         self.assertEqual(len(patch_segments), 3)
@@ -107,7 +107,7 @@ class TestFindSegments(unittest.TestCase):
         coarse_cell_size = 5
         patch_size = 5
         index = 0
-        gird_segments, patch_segments = ndpatch._find_segments(coarse_cell_size, patch_size, index)
+        gird_segments, patch_segments = ndpatch.find_segments(coarse_cell_size, patch_size, index)
         
         self.assertEqual(len(gird_segments), 1)
         self.assertEqual(len(patch_segments), 1)
