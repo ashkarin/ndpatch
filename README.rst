@@ -1,4 +1,4 @@
-.. image:: static/logo.svg
+.. image:: static/ndpatch.svg
     :height: 120
     :align: center
     
