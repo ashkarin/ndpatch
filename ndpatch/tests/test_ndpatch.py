@@ -83,7 +83,8 @@ class TestFindSegments(unittest.TestCase):
         patch_size = 9
         index = -2
         gird_segments, patch_segments = ndpatch.find_segments(coarse_cell_size, patch_size, index)
-        
+        print (gird_segments)
+        print (patch_segments)
         self.assertEqual(len(gird_segments), 3)
         self.assertEqual(len(patch_segments), 3)
 

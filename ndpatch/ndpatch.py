@@ -3,11 +3,16 @@ import collections
 import numpy as np
 from math import ceil, floor
 
+try:
+    from collections.abc import Sequence
+except ImportError:
+    from collections import Sequence
+
 
 def _is_sequence_of_integers(value):
     if isinstance(value, np.ndarray):
         value = value.tolist()
-    return isinstance(value, collections.abc.Sequence) and np.all(isinstance(v, int) for v in value)
+    return isinstance(value, Sequence) and np.all(isinstance(v, int) for v in value)
 
 
 def get_patches_indices(array_shape, patch_shape, overlap=None, start=None):
@@ -55,9 +60,9 @@ def get_patches_indices(array_shape, patch_shape, overlap=None, start=None):
         array_shape = np.asarray(array_shape)
         patch_shape = np.asarray(patch_shape)
         overlap = np.asarray(overlap)
-        n_patches = np.ceil(array_shape / (patch_shape - overlap)).astype(np.int32)
+        n_patches = np.ceil(array_shape.astype(np.float) / (patch_shape - overlap)).astype(np.int32)
         overflow = (patch_shape - overlap) * n_patches - array_shape + overlap
-        start = -np.ceil(overflow / 2).astype(np.int32)
+        start = -np.ceil(overflow.astype(np.float) / 2).astype(np.int32)
         start = tuple(start)
 
     if isinstance(start, int):
@@ -135,7 +140,7 @@ def reconstruct_from_patches(patches, indices, array_shape, default_value=0, ave
     
     # Average values if required
     if average:
-        array /= counter
+        array = array / counter
 
     return array
 
@@ -195,11 +200,11 @@ def find_segments(array_size, patch_size, index):
     # falling in the region (if region larger than data)
     grid_pos = start
     patch_pos = 0
-    nsegments = int(ceil(patch_size / array_size))
+    nsegments = int(ceil(float(patch_size) / array_size))
 
     for _ in range(0, nsegments + 1):
             # Compute next closest cell boundary
-            boundary = (int(floor(grid_pos / array_size)) + 1) * array_size
+            boundary = (int(floor(float(grid_pos) / array_size)) + 1) * array_size
             
             # Reset the boundary if the region ends before it.
             boundary = stop if stop <= boundary else boundary
